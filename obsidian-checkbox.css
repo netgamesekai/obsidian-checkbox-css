@@ -1,0 +1,81 @@
+/*
+
+obsidian-checkbox-css
+https://github.com/netgamesekai/obsidian-checkbox-css
+
+*/
+
+body {
+  /* checkbox colors */
+  --checkbox: #999ba3;
+  --checkbox-done: #59c583;
+  --checkbox-wip: #ead467; 
+  --checkbox-forwarded:#6aadce;
+
+  /* no strikethrough on completed tasks */
+  --checklist-done-decoration:inherit;
+  --checklist-done-color:inherit;
+}
+
+/* strikethrough on forwarded or cancelled tasks */
+
+.task-list-item[data-task=">"],
+.task-list-item[data-task="-"],
+.HyperMD-task-line[data-task=">"] span,
+.HyperMD-task-line[data-task="-"] span{
+  color: var(--checkbox);
+  text-decoration: line-through;
+}
+
+/* initialising */
+
+input[type="checkbox"].task-list-item-checkbox:checked::after {
+  display: none;
+}
+
+input[type="checkbox"].task-list-item-checkbox:checked {
+  background-image: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  position: relative;
+}
+
+/* styling */
+
+/* new task */
+.task-list-item[data-task=" "] input[type="checkbox"].task-list-item-checkbox,
+input[type="checkbox"][data-task=" "].task-list-item-checkbox {
+  border-color: var(--checkbox) !important;
+}
+
+/* completed */
+input[type="checkbox"][data-task="x"].task-list-item-checkbox:checked,
+.task-list-item[data-task="x"] input[type="checkbox"].task-list-item-checkbox:checked {
+  border-color: var(--checkbox-done) !important;
+  background-color: var(--checkbox-done) !important;
+  background-image: url('data:image/svg+xml,<svg version="1.1" baseProfile="tiny" id="Layer_1" width="800px" height="800px" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg"><defs></defs><path d="M 38.525 7.876 L 36.127 5.946 C 34.945 4.996 34.258 5.007 33.246 6.257 L 15.817 27.766 L 7.706 21.027 C 6.587 20.087 5.887 20.137 4.967 21.287 L 3.116 23.697 C 2.177 24.879 2.297 25.55 3.407 26.477 L 14.967 36.039 C 16.157 37.039 16.827 36.936 17.747 35.817 L 38.826 10.756 C 39.816 9.566 39.756 8.855 38.525 7.876 Z" style="fill: rgb(255, 255, 255);"></path></svg>');
+}
+
+/* working in progress */
+.task-list-item[data-task="/"] input[type="checkbox"].task-list-item-checkbox:checked,
+input[type="checkbox"][data-task="/"].task-list-item-checkbox:checked {
+  border-color: var(--checkbox-wip);
+  background: linear-gradient(90deg, var(--checkbox-wip) 50%, transparent 50%) !important;
+}
+
+/* forwarded */
+.task-list-item[data-task=">"] input[type="checkbox"].task-list-item-checkbox:checked,
+input[type="checkbox"][data-task=">"].task-list-item-checkbox:checked {
+  border-color: var(--checkbox-forwarded);
+  background-color: var(--checkbox-forwarded) !important;
+  background-image: url('data:image/svg+xml,<svg version="1.1" baseProfile="tiny" id="Layer_1" width="800px" height="800px" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg"><defs></defs><polygon fill-rule="evenodd" points="28.566 40.819 8.5 20.751 28.068 1.181 33.002 6.114 18.365 20.751 33.5 35.885" style="fill: rgb(255, 255, 255); transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(-1, 0, 0, -1, 0, 0.000002)"></polygon></svg>');
+}
+
+/* cancelled */
+.task-list-item[data-task="-"] input[type="checkbox"].task-list-item-checkbox:checked,
+input[type="checkbox"][data-task="-"].task-list-item-checkbox:checked {
+  border-color: var(--checkbox);
+  background-color: var(--checkbox) !important;
+  background-image: url('data:image/svg+xml,<svg fill="%23000000" version="1.1" baseProfile="tiny" id="Layer_1" width="800px" height="800px" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg"><defs></defs><rect x="5.15" y="16.928" width="31.7" height="8.143" style="fill: rgb(255, 255, 255);"></rect></svg>');
+}
